@@ -10,6 +10,7 @@ if not exist "node_modules" (
 
 :: Build if needed
 if not exist "dist\index.html" (
+    echo Building app, please wait...
     npm run build --silent 2>nul
 )
 
@@ -22,10 +23,10 @@ if %errorlevel% equ 0 (
     exit /b 0
 )
 
-:: Start server silently (no window)
-start "FreeGSTBill Server" /min cmd /c "node server.js"
+:: Start server completely hidden (no window, no taskbar icon)
+powershell -WindowStyle Hidden -Command "Start-Process node -ArgumentList 'server.js' -WorkingDirectory '%~dp0' -WindowStyle Hidden"
 
-:: Wait for server
+:: Wait for server to be ready
 set RETRIES=0
 :waitloop
 if %RETRIES% geq 20 goto openanyway

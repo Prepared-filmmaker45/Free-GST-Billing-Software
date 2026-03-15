@@ -142,9 +142,9 @@ echo.
 :: ========================================
 :: Step 4: Create Desktop Shortcut
 :: ========================================
-echo  [4/4] Creating shortcuts...
+echo  [4/5] Creating shortcuts...
 
-set "TARGET_PATH=%~dp0FreeGSTBill.vbs"
+set "TARGET_PATH=%~dp0Start FreeGSTBill.bat"
 
 :: Desktop shortcut
 set "DESKTOP_SHORTCUT=%USERPROFILE%\Desktop\FreeGSTBill.lnk"
@@ -160,19 +160,17 @@ set "TEMP_VBS=%TEMP%\create_shortcut.vbs"
     echo Set WshShell = WScript.CreateObject("WScript.Shell"^)
     echo.
     echo Set desktopShortcut = WshShell.CreateShortcut("%DESKTOP_SHORTCUT%"^)
-    echo desktopShortcut.TargetPath = "wscript.exe"
-    echo desktopShortcut.Arguments = """%TARGET_PATH%"""
+    echo desktopShortcut.TargetPath = "%TARGET_PATH%"
     echo desktopShortcut.WorkingDirectory = "%~dp0"
     echo desktopShortcut.Description = "FreeGSTBill - Free GST Billing Software"
-    echo desktopShortcut.WindowStyle = 7
+    echo desktopShortcut.WindowStyle = 1
     echo desktopShortcut.Save
     echo.
     echo Set startShortcut = WshShell.CreateShortcut("%STARTMENU_SHORTCUT%"^)
-    echo startShortcut.TargetPath = "wscript.exe"
-    echo startShortcut.Arguments = """%TARGET_PATH%"""
+    echo startShortcut.TargetPath = "%TARGET_PATH%"
     echo startShortcut.WorkingDirectory = "%~dp0"
     echo startShortcut.Description = "FreeGSTBill - Free GST Billing Software"
-    echo startShortcut.WindowStyle = 7
+    echo startShortcut.WindowStyle = 1
     echo startShortcut.Save
 ) > "%TEMP_VBS%"
 
@@ -202,7 +200,7 @@ set "REG_VBS=%TEMP%\reg_protocol.vbs"
     echo On Error Resume Next
     echo WshShell.RegWrite "HKCU\Software\Classes\freegstbill\", "URL:FreeGSTBill Protocol", "REG_SZ"
     echo WshShell.RegWrite "HKCU\Software\Classes\freegstbill\URL Protocol", "", "REG_SZ"
-    echo WshShell.RegWrite "HKCU\Software\Classes\freegstbill\shell\open\command\", "wscript.exe ""%TARGET_PATH%""", "REG_SZ"
+    echo WshShell.RegWrite "HKCU\Software\Classes\freegstbill\shell\open\command\", "cmd /c ""%TARGET_PATH%""", "REG_SZ"
 ) > "%REG_VBS%"
 
 cscript //nologo "%REG_VBS%" 2>nul
@@ -220,11 +218,10 @@ echo     Installation Complete!
 echo.
 echo     To start FreeGSTBill:
 echo       - Double-click "FreeGSTBill" on Desktop
-echo       - Or double-click FreeGSTBill.vbs here
+echo       - Or double-click "Start FreeGSTBill.bat" here
 echo.
 echo     To install as PWA (optional):
-echo       - Open Chrome/Edge to localhost:3001
-echo       - Click install icon in address bar
+echo       - When app opens, click "Install App" blue bar
 echo.
 echo  ========================================================
 echo.
@@ -232,7 +229,7 @@ echo  Starting FreeGSTBill...
 echo  (Your browser will open automatically)
 echo.
 
-start "" wscript.exe "%~dp0FreeGSTBill.vbs"
+start "" "%~dp0Start FreeGSTBill.bat"
 
 echo.
 echo  ========================================================

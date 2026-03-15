@@ -6,7 +6,34 @@ Create GST-compliant invoices for Indian and international clients. Runs 100% lo
 
 **Built by [DiceCodes](mailto:Contact@dicecodes.com)**
 
-![FreeGSTBill Screenshot](screenshot.png)
+<table>
+<tr>
+<td width="55%">
+<img src="screenshot.png" alt="FreeGSTBill Screenshot" width="100%" />
+</td>
+<td width="45%" valign="top">
+
+### Download & Install
+
+<a href="https://github.com/IamRamgarhia/freegstbill/archive/refs/heads/main.zip">
+<img src="https://img.shields.io/badge/⬇_Download_ZIP-blue?style=for-the-badge&logoColor=white" alt="Download ZIP" height="45" />
+</a>
+
+**3 steps to start billing:**
+
+1. **Download** the ZIP above
+2. **Extract** the folder
+3. **Double-click** `Install FreeGSTBill.bat`
+
+The app opens automatically in your browser at **http://localhost:3001**
+
+> **No coding needed.** No terminal. No commands. Just double-click and go.
+
+📄 See [`START HERE.txt`](START%20HERE.txt) after extracting for full guide.
+
+</td>
+</tr>
+</table>
 
 ---
 

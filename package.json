@@ -1,6 +1,6 @@
 {
   "name": "freegstbill",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "FreeGSTBill — Free, open-source GST invoice & billing software. Tax Invoice, Proforma, Credit Note, Bill of Supply with multi-currency support (USD, EUR, GBP). Offline, no signup. By DiceCodes.",
   "author": "DiceCodes <Contact@dicecodes.com>",
   "license": "MIT",

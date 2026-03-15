@@ -246,7 +246,7 @@ function App() {
             </button>
             <div className={`server-status server-status-${serverStatus}`}>
               <span className="server-status-dot" />
-              {serverStatus === 'online' ? 'Server Running' : serverStatus === 'offline' ? 'Server Offline' : 'Checking...'}
+              {serverStatus === 'online' ? 'App Ready' : serverStatus === 'offline' ? 'App Not Running' : 'Connecting...'}
             </div>
           </div>
         </nav>

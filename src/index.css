@@ -190,6 +190,46 @@ body {
   .pwa-install-banner { left: 0; }
 }
 
+/* Server Status Indicator */
+.server-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  margin-top: 0.5rem;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #94a3b8;
+  background: rgba(255,255,255,0.03);
+}
+.server-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.server-status-online .server-status-dot {
+  background: #22c55e;
+  box-shadow: 0 0 6px #22c55e;
+}
+.server-status-online { color: #86efac; }
+.server-status-offline .server-status-dot {
+  background: #ef4444;
+  box-shadow: 0 0 6px #ef4444;
+  animation: pulse-red 1.5s ease-in-out infinite;
+}
+.server-status-offline { color: #fca5a5; }
+.server-status-checking .server-status-dot {
+  background: #f59e0b;
+  animation: pulse-red 1s ease-in-out infinite;
+}
+.server-status-checking { color: #fcd34d; }
+@keyframes pulse-red {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
 /* Server Down Overlay */
 .server-down-overlay {
   position: fixed;

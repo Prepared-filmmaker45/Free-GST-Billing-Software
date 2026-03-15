@@ -33,7 +33,10 @@ function App() {
   const deferredPrompt = useRef(null);
   const retryTimer = useRef(null);
 
-  // Check if server is running
+  const [serverStatus, setServerStatus] = useState('checking'); // 'checking' | 'online' | 'offline'
+  const profileLoaded = useRef(false);
+
+  // Check if server is running — continuously monitors
   useEffect(() => {
     let cancelled = false;
 
@@ -43,24 +46,29 @@ function App() {
         if (res.ok) {
           if (cancelled) return;
           setServerDown(false);
-          const p = await res.json();
-          setProfile(p);
-          if (!p.businessName && !localStorage.getItem('freegstbill_onboarded')) {
-            setShowWelcome(true);
+          setServerStatus('online');
+          if (!profileLoaded.current) {
+            profileLoaded.current = true;
+            const p = await res.json();
+            setProfile(p);
+            if (!p.businessName && !localStorage.getItem('freegstbill_onboarded')) {
+              setShowWelcome(true);
+            }
           }
-          // Stop retrying
-          if (retryTimer.current) clearInterval(retryTimer.current);
           return;
         }
         throw new Error('not ok');
       } catch {
-        if (!cancelled) setServerDown(true);
+        if (!cancelled) {
+          setServerDown(true);
+          setServerStatus('offline');
+        }
       }
     };
 
     checkServer();
-    // If server is down, keep retrying every 3 seconds
-    retryTimer.current = setInterval(checkServer, 3000);
+    // Keep checking every 5 seconds (fast when down, normal heartbeat when up)
+    retryTimer.current = setInterval(checkServer, 5000);
 
     return () => {
       cancelled = true;
@@ -233,6 +241,10 @@ function App() {
             >
               <Settings size={18} /> Settings
             </button>
+            <div className={`server-status server-status-${serverStatus}`}>
+              <span className="server-status-dot" />
+              {serverStatus === 'online' ? 'Server Running' : serverStatus === 'offline' ? 'Server Offline' : 'Checking...'}
+            </div>
           </div>
         </nav>
       </div>

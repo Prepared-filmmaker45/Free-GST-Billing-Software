@@ -246,9 +246,11 @@ All compliance data is generated automatically from your invoices and expenses. 
 That's it. Bookmark this link or install as a desktop app (see below).
 
 ### After Installation
+- **The app starts automatically** when you turn on your PC — no manual steps needed
 - **To open the app** → Double-click `FreeGSTBill` on Desktop, or search "FreeGSTBill" in Start Menu
 - **Your app URL** → Always **http://localhost:3001** (bookmark this!)
-- **If the page doesn't load** → The server might not be running. Double-click `FreeGSTBill.vbs` or the Desktop shortcut to start it.
+- **If the page doesn't load** → Double-click the Desktop shortcut or `Start FreeGSTBill.bat` to start it
+- **Saved invoices** → PDF files are auto-saved in `Saved Invoices/{Client Name}/{Month}/`
 
 ### First-Time Setup
 1. The Welcome Guide will walk you through setting up your business profile

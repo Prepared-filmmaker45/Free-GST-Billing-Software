@@ -182,7 +182,7 @@ function App() {
             <ol>
               <li>Double-click <strong>FreeGSTBill</strong> on your Desktop</li>
               <li>Or search <strong>"FreeGSTBill"</strong> in Start Menu</li>
-              <li>Or double-click <strong>FreeGSTBill.vbs</strong> in the app folder</li>
+              <li>Or double-click <strong>Start FreeGSTBill.bat</strong> in the app folder</li>
             </ol>
           </div>
           <div className="server-down-waiting">

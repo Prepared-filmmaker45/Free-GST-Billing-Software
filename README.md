@@ -6,6 +6,8 @@ Create GST-compliant invoices for Indian and international clients. Runs 100% lo
 
 **Built by [DiceCodes](mailto:Contact@dicecodes.com)**
 
+![FreeGSTBill Screenshot](screenshot.png)
+
 ---
 
 ## Why FreeGSTBill?

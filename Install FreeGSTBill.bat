@@ -142,32 +142,52 @@ echo.
 :: ========================================
 :: Step 4: Create Desktop Shortcut
 :: ========================================
-echo  [4/4] Creating desktop shortcut...
+echo  [4/4] Creating shortcuts...
 
-set "SHORTCUT_PATH=%USERPROFILE%\Desktop\FreeGSTBill.lnk"
 set "TARGET_PATH=%~dp0FreeGSTBill.vbs"
-set "ICON_DIR=%~dp0"
 
-:: Create VBS shortcut creator script
+:: Desktop shortcut
+set "DESKTOP_SHORTCUT=%USERPROFILE%\Desktop\FreeGSTBill.lnk"
+
+:: Start Menu shortcut (searchable from Windows Start)
+set "STARTMENU_DIR=%APPDATA%\Microsoft\Windows\Start Menu\Programs\FreeGSTBill"
+if not exist "%STARTMENU_DIR%" mkdir "%STARTMENU_DIR%"
+set "STARTMENU_SHORTCUT=%STARTMENU_DIR%\FreeGSTBill.lnk"
+
+:: Create VBS shortcut creator script (creates both shortcuts)
 set "TEMP_VBS=%TEMP%\create_shortcut.vbs"
 (
     echo Set WshShell = WScript.CreateObject("WScript.Shell"^)
-    echo Set shortcut = WshShell.CreateShortcut("%SHORTCUT_PATH%"^)
-    echo shortcut.TargetPath = "wscript.exe"
-    echo shortcut.Arguments = """%TARGET_PATH%"""
-    echo shortcut.WorkingDirectory = "%~dp0"
-    echo shortcut.Description = "FreeGSTBill - Free GST Billing Software"
-    echo shortcut.WindowStyle = 7
-    echo shortcut.Save
+    echo.
+    echo Set desktopShortcut = WshShell.CreateShortcut("%DESKTOP_SHORTCUT%"^)
+    echo desktopShortcut.TargetPath = "wscript.exe"
+    echo desktopShortcut.Arguments = """%TARGET_PATH%"""
+    echo desktopShortcut.WorkingDirectory = "%~dp0"
+    echo desktopShortcut.Description = "FreeGSTBill - Free GST Billing Software"
+    echo desktopShortcut.WindowStyle = 7
+    echo desktopShortcut.Save
+    echo.
+    echo Set startShortcut = WshShell.CreateShortcut("%STARTMENU_SHORTCUT%"^)
+    echo startShortcut.TargetPath = "wscript.exe"
+    echo startShortcut.Arguments = """%TARGET_PATH%"""
+    echo startShortcut.WorkingDirectory = "%~dp0"
+    echo startShortcut.Description = "FreeGSTBill - Free GST Billing Software"
+    echo startShortcut.WindowStyle = 7
+    echo startShortcut.Save
 ) > "%TEMP_VBS%"
 
 cscript //nologo "%TEMP_VBS%" 2>nul
 del "%TEMP_VBS%" 2>nul
 
-if exist "%SHORTCUT_PATH%" (
+if exist "%DESKTOP_SHORTCUT%" (
     echo         Desktop shortcut created
 ) else (
-    echo         Could not create shortcut (you can manually create one to FreeGSTBill.vbs)
+    echo         Could not create desktop shortcut
+)
+if exist "%STARTMENU_SHORTCUT%" (
+    echo         Start Menu shortcut created (search "FreeGSTBill" in Start)
+) else (
+    echo         Could not create Start Menu shortcut
 )
 echo.
 
